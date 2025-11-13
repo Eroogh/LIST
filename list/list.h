@@ -45,7 +45,8 @@ LISTERRNUM;
 
 const int PoisonVal = 666666;
 const int CanaryVal = 0xC1A551C;
-         
+const char* LogWidth = "2000";
+
 #define STRUCTLISTINIT(list, size, htmfile)                  StructListInit(list, size, htmfile, __LINE__)
 #define STRUCTLISTVERIFY(list)                               StructListVerify(list, __LINE__, stderr)
 #define STRUCTLISTDUMP(list, filename)                       StructListDump(list, filename, __LINE__)
@@ -83,6 +84,7 @@ LISTERRNUM StructListRemove(StructList *list, long long unsigned index, FILE *ht
 long long UnFreeTheElemAfter(StructList *list, long long unsigned index);
 long long UnFreeTheElemBefore(StructList *list, long long unsigned index);
 long long FreeTheElem(StructList *list, long long unsigned index);
+
 
 
 

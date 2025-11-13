@@ -210,8 +210,6 @@ LISTERRNUM SilentListVerify(StructList *list)
 
 //------------------------------------ TODO sleep more, print function's name in logs
 
-#define LogWidth "2000"
-
 LISTERRNUM StructListLogWrite(StructList *list, FILE *htmfile, long unsigned line, bool ListDestroyed)
 {
     assert(list);
@@ -279,8 +277,9 @@ LISTERRNUM LogDump(FILE *htmfile, StructList *list,  char* DumpFileName, long un
     fprintf(htmfile,"\nline = %lu\n"
                     "here's your list:</p>\n"
                     "\t</pre>\n"
-                    "\t<img src=\"%s.svg\" width = \"" LogWidth "\"></img>\n",
-                    line, DumpFileName
+                    "\t<img src=\"%s.svg\" width = \"%s\"></img>\n",
+                    line, 
+                    DumpFileName, LogWidth
             );
 
     char LogStuffDumpFileName[100] = {};
@@ -371,7 +370,11 @@ void DrawNode(FILE * output, StructList * list, size_t i, int scale)
                 "\t\t<TR><TD BGCOLOR=\"red\" PORT=\"prev%zu\">prev = %llu</TD>\n"
                     "\t\t\t<TD BGCOLOR=\"red\" PORT=\"next%zu\">next = %llu</TD></TR>\n"
             "\t\t</TABLE>>];\n\n",
-            i, scale*i, i, list->elems[i].val, i, list->elems[i].prev, i, list->elems[i].next);
+            i, scale*i, 
+            i,
+            list->elems[i].val,
+            i, list->elems[i].prev,
+            i, list->elems[i].next);
 
 }
 
@@ -465,8 +468,8 @@ void DrawEdgeForFreeElems(FILE * output, StructList * list, size_t i, int scale)
 void DrawEdge0(FILE * output, StructList * list, int scale)
 {
     fprintf(output,
-                    "\tfictthing [shape = rectangle, pos=\"%llu,%ld!\", label=\"\", width=0, height=0, color=\"" color2  "\"];\n\n",
-                    scale*(list->elems[0].prev)/2, -(long)(My_abs(list->elems[0].prev)+ 1));
+            "\tfictthing [shape = rectangle, pos=\"%llu,%ld!\", label=\"\", width=0, height=0, color=\"" color2  "\"];\n\n",
+            scale*(list->elems[0].prev)/2, -(long)(My_abs(list->elems[0].prev)+ 1));
 
     fprintf(output,
             "\thead [pos=\"%llu,0.6!\", label=\"head\"];\n\n", 
